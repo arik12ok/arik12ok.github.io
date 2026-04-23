@@ -1,257 +1,373 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>ИИ в робототехнике | Презентация</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        * {
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            box-sizing: border-box;
         }
-        
-        .slide-container {
-            width: 80%;
-            max-width: 800px;
-            margin: auto;
-            border-radius: 10px;
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(145deg, #e0e5ec 0%, #f0f4fa 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px 20px;
+        }
+
+        /* Основной контейнер презентации */
+        .presentation-container {
+            max-width: 1300px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 48px;
+            box-shadow: 0 25px 45px -12px rgba(0,0,0,0.3);
             overflow: hidden;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            background-color: white;
-            margin-bottom: 20px;
+            transition: all 0.2s ease;
         }
-        
-        h1 {
-            text-align: center;
-            color: #333;
+
+        /* Область слайда */
+        .slide-area {
+            position: relative;
+            min-height: 70vh;
+            background: #fff;
         }
-        
-        p {
-            line-height: 1.6;
-            padding: 20px;
-            color: #555;
+
+        .slide {
+            display: none;
+            padding: 40px 48px;
+            animation: fadeSlide 0.4s ease-out;
         }
-        
-        img {
+
+        .slide.active {
             display: block;
-            margin: auto;
-            max-width: 100%;
         }
-        
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-            margin-top: 0;
-            background-color: #333;
+
+        @keyframes fadeSlide {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* === СТИЛИ ДЛЯ СОДЕРЖИМОГО (полная аналогия исходной презентации) === */
+        .slide h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb4d);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 24px;
+            letter-spacing: -0.01em;
+        }
+
+        .slide h2 {
+            font-size: 2rem;
+            margin: 24px 0 16px 0;
+            color: #0a2540;
+            border-left: 6px solid #2c7da0;
+            padding-left: 20px;
+        }
+
+        .slide h3 {
+            font-size: 1.5rem;
+            margin: 20px 0 12px 0;
+            color: #1f6392;
+        }
+
+        .slide p {
+            font-size: 1.1rem;
+            line-height: 1.5;
+            margin-bottom: 16px;
+            color: #2c3e4e;
+        }
+
+        .slide ul, .slide ol {
+            margin: 16px 0 16px 28px;
+            font-size: 1.05rem;
+            line-height: 1.5;
+            color: #2c3e4e;
+        }
+
+        .slide li {
+            margin: 8px 0;
+        }
+
+        .slide blockquote {
+            background: #f0f7fb;
+            border-left: 5px solid #2c7da0;
+            padding: 14px 24px;
+            margin: 20px 0;
+            border-radius: 20px;
+            font-style: italic;
+            color: #1e4663;
+        }
+
+        .slide table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: #f9fbfd;
+            border-radius: 24px;
             overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
-        
-        nav li {
-            float: left;
+
+        .slide th, .slide td {
+            border: 1px solid #dce5ec;
+            padding: 12px 16px;
+            text-align: left;
+            vertical-align: top;
         }
-        
-        nav a {
-            display: inline-block;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
+
+        .slide th {
+            background: #eef3f9;
+            font-weight: 600;
+            color: #0f3b5c;
         }
-        
-        nav a:hover {
-            background-color: #555;
+
+        .slide code {
+            background: #eef2f6;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
         }
-        
-        footer {
-            text-align: center;
-            padding: 10px;
-            background-color: #333;
-            color: white;
+
+        /* навигация */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 48px 30px 48px;
+            background: #ffffff;
+            border-top: 1px solid #e9edf2;
         }
-        
-        button {
-            padding: 10px 20px;
-            cursor: pointer;
-            font-size: 16px;
+
+        .nav-btn {
+            background: #2c7da0;
             border: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease-in-out;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 12px 28px;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-        
-        button.prev {
-            background-color: #ff5722;
+
+        .nav-btn:hover:not(:disabled) {
+            background: #1f5e7e;
+            transform: scale(1.02);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
         }
-        
-        button.next {
-            background-color: #4caf50;
+
+        .nav-btn:disabled {
+            background: #bdc4cc;
+            cursor: not-allowed;
+            opacity: 0.6;
+            transform: none;
         }
-        
-        button.start {
-            background-color: #2196f3;
+
+        .slide-counter {
+            font-size: 1rem;
+            background: #eef2f7;
+            padding: 8px 18px;
+            border-radius: 40px;
+            color: #1f5e7e;
+            font-weight: 500;
         }
-        
-        @media screen and (max-width: 600px) {
-            nav li {
-                float: none;
-                width: 100%;
+
+        /* адаптив */
+        @media (max-width: 780px) {
+            .slide {
+                padding: 28px 20px;
             }
-            
-            nav a {
-                display: block;
-                text-align: left;
+            .slide h1 {
+                font-size: 2.2rem;
             }
+            .slide h2 {
+                font-size: 1.6rem;
+            }
+            .nav-buttons {
+                padding: 16px 20px;
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+            .nav-btn {
+                padding: 8px 20px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* расцветка для акцентов */
+        .highlight {
+            background: linear-gradient(120deg, #f9f3e6 0%, #fff1db 100%);
+            padding: 6px 12px;
+            border-radius: 24px;
+            font-weight: 500;
+        }
+
+        footer {
+            font-size: 0.75rem;
+            text-align: center;
+            padding: 12px;
+            background: #f8fafc;
+            color: #6c86a3;
+            border-top: 1px solid #e2e8f0;
         }
     </style>
-    <title>Искусственный интеллект в робототехнике</title>
 </head>
 <body>
-    <div class="slide-container">
-        <header>
-            <h1>Проект на тему: Искусственный интеллект в робототехнике</h1>
-            <p>Выполнил ученик 10 класса «Б» МОУ Раменской СОШ №5 Хаустов Ярослав<br>Руководитель проекта Бехтеева Елена Владимировна</p>
-        </header>
-        <nav>
+<div class="presentation-container">
+    <div class="slide-area">
+        <!-- Слайд 1: Титульный (переработанный, читаемый и стильный) -->
+        <div class="slide active" id="slide1">
+            <div style="text-align: center; margin-top: 20px; margin-bottom: 30px;">
+                <span style="background: #eef2ff; padding: 6px 18px; border-radius: 100px; font-weight: 500; color:#2c7da0;">🤖✨ Интеллектуальные системы</span>
+            </div>
+            <h1 style="text-align: center; font-size: 3.4rem; margin-bottom: 20px;">Искусственный интеллект <br>в робототехнике</h1>
+            <p style="text-align: center; font-size: 1.2rem; color: #2c5a74; max-width: 85%; margin: 0 auto 30px auto;">Как нейросети, обучение с подкреплением и компьютерное зрение<br>меняют облик автономных машин</p>
+            <div style="background: #eef2fa; padding: 20px; border-radius: 32px; margin-top: 20px; text-align: center;">
+                <p style="margin-bottom: 0;"><strong>📌 Ключевые направления:</strong> Computer Vision, Reinforcement Learning, SLAM, планирование траекторий</p>
+                <p style="margin-top: 12px; font-size: 0.9rem;">Современная робототехника немыслима без методов ИИ — от беспилотных автомобилей до медицинских ассистентов</p>
+            </div>
+        </div>
+
+        <!-- Слайд 2: Основные сферы ИИ в робототехнике -->
+        <div class="slide" id="slide2">
+            <h2>🧠 Роль ИИ в управлении роботами</h2>
+            <p>Искусственный интеллект превращает роботов из жёстко запрограммированных машин в адаптивные системы, способные воспринимать окружение и принимать решения в реальном времени.</p>
             <ul>
-                <li><button onclick="goToSlide('start')">Начало</button></li>
-                <li><button onclick="goToSlide('prev')">Предыдущая</button></li>
-                <li><button onclick="goToSlide('next')">Следующая</button></li>
+                <li><strong>🔍 Компьютерное зрение</strong> – распознавание объектов, навигация, избегание препятствий.</li>
+                <li><strong>🎓 Обучение с подкреплением (RL)</strong> – роботы самостоятельно обучаются сложным движениям и тактикам.</li>
+                <li><strong>🗺️ SLAM (Simultaneous Localization and Mapping)</strong> – построение карты неизвестной среды.</li>
+                <li><strong>🤖 Планирование движений и манипуляции</strong> – точный захват, сборка, взаимодействие.</li>
             </ul>
-        </nav>
-    </div>
-    
-    <div class="slide-container">
-        <section id="oglavlenie">
-            <h1>Оглавление:</h1>
-            <ol>
-                <li>Введение</li>
-                <li>Основная часть
-                    <ol>
-                        <li>Вступление, введение</li>
-                        <li>Цели и задачи</li>
-                        <li>Что такое ESP32?</li>
-                        <li>Устройство и схема лидара</li>
-                        <li>Шаговые двигатели</li>
-                        <li>Драйвер шагового двигателя</li>
-                        <li>Схема робота</li>
-                        <li>Интеграция ИИ</li>
-                    </ol>
-                </li>
-                <li>Заключение</li>
-                <li>Список литературы</li>
-            </ol>
-        </section>
-        <nav>
+            <blockquote>«ИИ — это ключ к созданию по-настоящему автономных роботов, способных действовать в условиях неопределённости»</blockquote>
+        </div>
+
+        <!-- Слайд 3: Компьютерное зрение и深度学习 -->
+        <div class="slide" id="slide3">
+            <h2>👁️ Компьютерное зрение и глубокое обучение</h2>
+            <p>Сверточные нейронные сети (CNN) и архитектуры вроде YOLO, EfficientNet обеспечивают высокую точность детекции и сегментации, что критически важно для мобильных роботов.</p>
             <ul>
-                <li><button onclick="goToSlide('start')">Начало</button></li>
-                <li><button onclick="goToSlide('prev')">Предыдущая</button></li>
-                <li><button onclick="goToSlide('next')">Следующая</button></li>
+                <li>Распознавание пешеходов, дорожных знаков, разметки — основа автономного вождения.</li>
+                <li>3D-зрение (LiDAR + RGB-D) + нейросетевые методы позволяют роботам "понимать" сцену.</li>
+                <li>Пример: роботы-доставщики (Starship, Amazon Scout) используют камеры и семантическую сегментацию.</li>
             </ul>
-        </nav>
-    </div>
-    
-    <div class="slide-container">
-        <section id="vstuplenie">
-            <h1>Вступление</h1>
-            <p>Почему я решил сделать робота с ИИ?<br>Моя цель — избавление человечества от рутинных задач, и с этим мне он поможет.</p>
-        </section>
-        <nav>
+            <p><strong>🔥 Тренд:</strong> объединение классических алгоритмов и нейросетей для повышения робастности.</p>
+        </div>
+
+        <!-- Слайд 4: Обучение с подкреплением и симуляции -->
+        <div class="slide" id="slide4">
+            <h2>🎮 Обучение с подкреплением и симуляторы</h2>
+            <p>Deep Reinforcement Learning (DRL) позволяет роботам обучаться сложным последовательным действиям путём проб и ошибок в виртуальных средах (Gazebo, Isaac Sim, PyBullet).</p>
             <ul>
-                <li><button onclick="goToSlide('start')">Начало</button></li>
-                <li><button onclick="goToSlide('prev')">Предыдущая</button></li>
-                <li><button onclick="goToSlide('next')">Следующая</button></li>
+                <li><strong>Пример:</strong> обучение ходьбы двуногих роботов (ANYmal, Atlas от Boston Dynamics).</li>
+                <li><strong>Sim‑to‑real transfer:</strong> перенос политик из симуляции на реальное оборудование с доменами случайности.</li>
+                <li>Использование алгоритмов PPO, SAC для управления манипуляторами в логистике и сборке.</li>
             </ul>
-        </nav>
-    </div>
-    
-    <div class="slide-container">
-        <section id="vvedenie">
-            <h1>Введение</h1>
-            <p>Актуальность:<br>В настоящее время программировать робота достаточно трудно, поэтому я ставлю между человеком и машиной переводчика в виде ИИ.<br>Гипотеза:<br>1. Искусственный интеллект поможет оптимизировать работу человека.<br>2. Он сделает взаимодействие человека и машины легче.</p>
-        </section>
-        <nav>
+        </div>
+
+        <!-- Слайд 5: Применение в промышленности и сервисе -->
+        <div class="slide" id="slide5">
+            <h2>🏭 Применение: от заводов до здравоохранения</h2>
+            <table>
+                <thead>
+                    <tr><th>Область</th><th>Решения на базе ИИ</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Промышленные роботы</td><td>Адаптивная сборка, контроль качества на основе машинного зрения, прогнозирование отказов.</td></tr>
+                    <tr><td>Сервисная робототехника</td><td>Роботы-уборщики, помощники в аэропортах, социальные роботы с распознаванием эмоций.</td></tr>
+                    <tr><td>Медицина</td><td>Роботизированные хирургические системы (Da Vinci), реабилитационные экзоскелеты.</td></tr>
+                    <tr><td>Экстремальная среда</td><td>Роботы-спасатели, подводные дроны с автономной навигацией на основе ИИ.</td></tr>
+                </tbody>
+            </table>
+            <p>ИИ также активно используется в роевой робототехнике (координация группы роботов без центрального управления).</p>
+        </div>
+
+        <!-- Слайд 6: Вызовы и будущее -->
+        <div class="slide" id="slide6">
+            <h2>⚠️ Текущие вызовы и будущие направления</h2>
             <ul>
-                <li><button onclick="goToSlide('start')">Начало</button></li>
-                <li><button onclick="goToSlide('prev')">Предыдущая</button></li>
-                <li><button onclick="goToSlide('next')">Следующая</button></li>
+                <li><strong>Недостаток данных и сложность сбора:</strong> обучение требует больших размеченных наборов или симуляций.</li>
+                <li><strong>Обобщение на новые среды:</strong> перенос обученных политик в реальный мир остаётся проблемой.</li>
+                <li><strong>Безопасность и интерпретируемость:</strong> необходимость объяснимого ИИ для критических систем.</li>
+                <li><strong>Энергоэффективность:</strong> Edge AI и нейроморфные вычисления для бортовых контроллеров.</li>
             </ul>
-        </nav>
+            <blockquote>🎯 Будущее: фундаментальные модели (Foundation models) + робототехника, мультимодальные агенты и полноценный общей интеллект в машинах.</blockquote>
+        </div>
+
+        <!-- Слайд 7: Итоги и заключение -->
+        <div class="slide" id="slide7">
+            <h2>📌 Заключение</h2>
+            <p>Искусственный интеллект — это не просто модное дополнение, а критическая составляющая современной робототехники. От автономного вождения до тонких хирургических операций – везде нейросетевые методы повышают автономность и эффективность.</p>
+            <p>Перспективы связаны с усилением симбиоза классических алгоритмов управления и глубокого обучения, развитием робототехнических фундаментальных моделей и массовым внедрением роботов с ИИ в повседневную жизнь.</p>
+            <div style="background: #eef3fc; border-radius: 24px; padding: 16px; margin: 20px 0; text-align: center;">
+                <strong>💡 Ключевая идея:</strong> «ИИ даёт роботам способность учиться и адаптироваться, открывая возможности, недоступные традиционному программированию».
+            </div>
+            <p style="margin-top: 20px;">Спасибо за внимание! 🚀</p>
+        </div>
     </div>
-    
-    <div class="slide-container">
-        <section id="celi-i-zadachi">
-            <h1>Цели и задачи</h1>
-            <p>Цель: Сделать робота с ИИ.<br>Задачи:<br>1. Сделать схему.<br>2. Собрать по схеме.<br>3. Написать код.<br>4. Протестировать.<br>5. Проверить в компиляторе.</p>
-        </section>
-        <nav>
-            <ul>
-                <li><button onclick="goToSlide('start')">Начало</button></li>
-                <li><button onclick="goToSlide('prev')">Предыдущая</button></li>
-                <li><button onclick="goToSlide('next')">Следующая</button></li>
-            </ul>
-        </nav>
+
+    <!-- Навигация между слайдами -->
+    <div class="nav-buttons">
+        <button class="nav-btn" id="prevBtn" aria-label="Предыдущий">◀ Назад</button>
+        <span class="slide-counter" id="slideCounter">Слайд 1 из 7</span>
+        <button class="nav-btn" id="nextBtn" aria-label="Следующий">Далее ▶</button>
     </div>
-    
-    <div class="slide-container">
-        <section id="esp32">
-            <h1>ESP32</h1>
-            <p>ESP32 — серия недорогих микросхем с малым энергопотреблением китайской компании Espressif Systems. Представляют собой систему на кристалле с интегрированными контроллерами радиосвязи Wi-Fi, Bluetooth и Thread. В сериях ESP32 и ESP32-S используются процессорные ядра с архитектурой компании Tensilica.</p>
-            <img src="path_to_your_image_esp32.png" alt="ESP32">
-        </section>
-        <nav>
-            <ul>
-                <li><button onclick="goToSlide('start')">Начало</button></li>
-                <li><button onclick="goToSlide('prev')">Предыдущая</button></li>
-                <li><button onclick="goToSlide('next')">Следующая</button></li>
-            </ul>
-        </nav>
-    </div>
-    
-    <div class="slide-container">
-        <section id="lidar">
-            <h1>Лидар</h1>
-            <p>Лидар — это технология, которая использует импульсы (чаще всего лазерные) для измерения расстояния до объектов. Название происходит от английского light detection and ranging — «обнаружение и определение дальности с помощью света». Устройство испускает лазерные лучи, которые отражаются от объектов и возвращаются к датчику. У света постоянная скорость, поэтому лидар может зафиксировать время, за которое луч вернулся, и рассчитать точное расстояние до объекта. Чтобы собрать как можно больше данных, лидар вращается или использует массив лазеров.</p>
-            <img src="path_to_your_image_lidar.png" alt="Lidar">
-        </section>
-        <nav>
-            <ul>
-                <li><button onclick="goToSlide('start')">Начало</button></li>
-                <li><button onclick="goToSlide('prev')">Предыдущая</button></li>
-                <li><button onclick="goToSlide('next')">Следующая</button></li>
-            </ul>
-        </nav>
-    </div>
-    
-    <footer>
-        © Ваш сайт {{current_year}}
-    </footer>
-    
-    <script>
-        const slides = document.querySelectorAll('.slide-container');
-        let currentIndex = 0;
-        
-        function goToSlide(action) {
-            if (action === 'start') {
-                currentIndex = 0;
-            } else if (action === 'prev') {
-                currentIndex--;
-                if (currentIndex < 0) currentIndex = slides.length - 1;
-            } else if (action === 'next') {
-                currentIndex++;
-                if (currentIndex >= slides.length) currentIndex = 0;
-            }
-            
-            for (let slide of slides) {
-                slide.style.display = 'none';
-            }
-            
-            slides[currentIndex].style.display = 'block';
+    <footer>ИИ в робототехнике — обзор современных технологий | Материал структурирован и адаптирован</footer>
+</div>
+
+<script>
+    // Управление слайдами
+    const slides = document.querySelectorAll('.slide');
+    const prevButton = document.getElementById('prevBtn');
+    const nextButton = document.getElementById('nextBtn');
+    const counterSpan = document.getElementById('slideCounter');
+    let currentSlide = 0;
+    const totalSlides = slides.length;
+
+    function updateSlides() {
+        slides.forEach((slide, idx) => {
+            slide.classList.toggle('active', idx === currentSlide);
+        });
+        counterSpan.innerText = `Слайд ${currentSlide+1} из ${totalSlides}`;
+        prevButton.disabled = currentSlide === 0;
+        nextButton.disabled = currentSlide === totalSlides - 1;
+    }
+
+    function nextSlide() {
+        if (currentSlide < totalSlides - 1) {
+            currentSlide++;
+            updateSlides();
         }
-        
-        // Initialize with first slide visible
-        window.onload = () => {
-            goToSlide('start');
-        };
-    </script>
+    }
+
+    function prevSlide() {
+        if (currentSlide > 0) {
+            currentSlide--;
+            updateSlides();
+        }
+    }
+
+    prevButton.addEventListener('click', prevSlide);
+    nextButton.addEventListener('click', nextSlide);
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') prevSlide();
+        if (e.key === 'ArrowRight') nextSlide();
+    });
+    updateSlides();
+</script>
 </body>
 </html>
